@@ -1,0 +1,108 @@
+---
+alwaysApply: true
+---
+
+
+---
+alwaysApply: true
+---
+# Role
+Ты - Rust/Solana программист, расширяющий Umay contracts на Solana blockchain.
+
+# Project: Umay
+A decentralized application (dApp) for facilitating crypto investments in agricultural projects in Kyrgyzstan.
+DONT WRITE COMMENTS FOR CODE!
+
+## Tech Stack (детали в packages/solana/ARCHITECTURE.md)
+**Language**: Rust 1.70+ (stable)
+**Framework**: Anchor 0.29+ (НЕ native Solana, используй Anchor!)
+**Network**: Solana Devnet → Testnet → Mainnet-Beta
+**Tests**: Anchor test framework (TypeScript + Mocha)
+
+## Testing Requirements
+**Unit Tests** (в Rust):
+✅ Instruction logic (verify_user, is_verified)
+✅ PDA derivation (seeds + bump validation)
+✅ Account validation (owner, signer checks)
+✅ Error handling (custom errors)
+
+**Integration Tests** (TypeScript):
+✅ End-to-end flows (initialize → verify → check)
+✅ Cross-instruction interactions
+✅ Invalid account handling (should fail)
+✅ Compute unit checks (<200k per tx)
+
+## Security & Code Principles
+1. **PDA Security**: ВСЕГДА используй canonical bump (первый найденный)
+2. **Signer Checks**: Используй `Signer<'info>` type, не `AccountInfo`
+3. **Account Validation**: Используй Anchor constraints (`#[account(...)]`)
+   - `seeds` + `bump` для PDA
+   - `has_one` для authority checks
+   - `constraint` для custom validation
+4. **No CPI Unless Necessary**: Minimize cross-program calls
+5. **Space Calculation**: 8 bytes discriminator + account data + padding
+6. **Rent Exemption**: ВСЕГДА делай accounts rent-exempt (2 года минимум)
+7. **Discriminators**: Anchor auto-generates, используй `Account<'info, T>`
+
+## Account Design Pattern
+```rust
+#[account]
+pub struct UserVerification {
+    pub user: Pubkey,           // 32 bytes
+    pub is_verified: bool,      // 1 byte
+    pub source: String,         // 4 + 32 = 36 bytes (max length)
+    pub timestamp: i64,         // 8 bytes
+    pub trust_score: u64,       // 8 bytes
+    pub bump: u8,               // 1 byte (store bump!)
+}
+// Total: 8 (discriminator) + 86 = 94 bytes
+```
+
+## PDA Best Practices (КРИТИЧНО!)
+```rust
+// ✅ ПРАВИЛЬНО: seeds in instruction
+#[account(
+    init,
+    seeds = [b"verification", user.key().as_ref()],
+    bump,
+    payer = authority,
+    space = 8 + UserVerification::INIT_SPACE
+)]
+pub verification: Account<'info, UserVerification>,
+
+// ❌ НЕПРАВИЛЬНО: не используй instruction data в seeds БЕЗ #[instruction()]
+// ❌ НЕПРАВИЛЬНО: не храни seeds в account state (только bump!)
+```
+
+## Error Handling
+```rust
+#[error_code]
+pub enum NotABotError {
+    #[msg("User already verified")]
+    AlreadyVerified,
+    #[msg("Invalid verification proof")]
+    InvalidProof,
+    #[msg("Authority not authorized")]
+    Unauthorized,
+}
+```
+
+## Development Flow
+1. Design accounts (`#[account]` structs)
+2. Design instructions (`#[derive(Accounts)]` + handler)
+3. Write tests (TypeScript integration tests)
+4. Deploy to Devnet
+5. Iterate based on test results
+
+## CRITICAL CONSTRAINTS ⚠️
+❌ НЕ БОЛЕЕ 200 строк Rust кода на один коммит!
+❌ ВСЕГДА store bump seed в account state
+❌ НИКОГДА не используй `AccountInfo` без validation
+❌ ВСЕГДА используй `msg!()` для debugging, не `println!`
+
+## Reference Priority
+1. Этот файл (solana rules)
+2. packages/solana/ARCHITECTURE.md (полная Solana архитектура)
+3. Solana MCP (ask questions для best practices)
+4. Anchor Book: https://www.anchor-lang.com/docs
+DONT WRITE COMMENTS FOR CODE!

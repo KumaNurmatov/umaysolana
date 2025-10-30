@@ -7,8 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { useAccount } from "wagmi";
-
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import ChainConnect from "../components/ChainConnect";
 
 const Home: NextPage = () => {
   const { isConnected, address } = useAccount();
@@ -64,47 +63,7 @@ const Home: NextPage = () => {
               Roadmap
             </a>
           </nav>
-          <ConnectButton.Custom>
-            {({ account, chain, openConnectModal, mounted }) => {
-              const ready = mounted;
-              const connected = ready && account && chain;
-
-              return (
-                <div
-                  {...(!ready && {
-                    "aria-hidden": true,
-                    style: {
-                      opacity: 0,
-                      pointerEvents: "none",
-                      userSelect: "none",
-                    },
-                  })}
-                >
-                  {(() => {
-                    if (!connected) {
-                      return (
-                        <button
-                          onClick={openConnectModal}
-                          className="px-8 py-3 bg-gradient-to-br from-primary to-primary/90 text-white text-lg font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-2"
-                        >
-                          Connect Wallet
-                        </button>
-                      );
-                    }
-
-                    return (
-                      <button
-                        onClick={redirectToApp}
-                        className="px-8 py-3 bg-gradient-to-br from-primary to-primary/90 text-white text-lg font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-2"
-                      >
-                        🚀 Invest Now
-                      </button>
-                    );
-                  })()}
-                </div>
-              );
-            }}
-          </ConnectButton.Custom>
+          <ChainConnect />
         </div>
       </header>
       <section className="relative overflow-hidden py-20 md:py-32">
@@ -122,47 +81,7 @@ const Home: NextPage = () => {
               reporting. Start small. Track everything.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-              <ConnectButton.Custom>
-                {({ account, chain, openConnectModal, mounted }) => {
-                  const ready = mounted;
-                  const connected = ready && account && chain;
-
-                  return (
-                    <div
-                      {...(!ready && {
-                        "aria-hidden": true,
-                        style: {
-                          opacity: 0,
-                          pointerEvents: "none",
-                          userSelect: "none",
-                        },
-                      })}
-                    >
-                      {(() => {
-                        if (!connected) {
-                          return (
-                            <button
-                              onClick={openConnectModal}
-                              className="px-8 py-3 bg-gradient-to-br from-primary to-primary/90 text-white text-lg font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-2"
-                            >
-                              Connect Wallet
-                            </button>
-                          );
-                        }
-
-                        return (
-                          <button
-                            onClick={redirectToApp}
-                            className="px-8 py-3 bg-gradient-to-br from-primary to-primary/90 text-white text-lg font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-2"
-                          >
-                            🚀 Invest Now
-                          </button>
-                        );
-                      })()}
-                    </div>
-                  );
-                }}
-              </ConnectButton.Custom>
+              <ChainConnect />
               <div className="flex items-center gap-3">
                 <button className="px-8 py-3 border border-border bg-background text-foreground text-lg font-semibold rounded-lg hover:bg-card transition-colors flex items-center gap-2">
                   👁️ Explore Projects
@@ -426,47 +345,7 @@ const Home: NextPage = () => {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <ConnectButton.Custom>
-                    {({ account, chain, openConnectModal, mounted }) => {
-                      const ready = mounted;
-                      const connected = ready && account && chain;
-
-                      return (
-                        <div
-                          {...(!ready && {
-                            "aria-hidden": true,
-                            style: {
-                              opacity: 0,
-                              pointerEvents: "none",
-                              userSelect: "none",
-                            },
-                          })}
-                        >
-                          {(() => {
-                            if (!connected) {
-                              return (
-                                <button
-                                  onClick={openConnectModal}
-                                  className="flex justify-center w-full px-8 py-3 bg-gradient-to-br from-primary to-primary/90 text-white text-lg font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-2"
-                                >
-                                  Connect Wallet
-                                </button>
-                              );
-                            }
-
-                            return (
-                              <button
-                                onClick={redirectToApp}
-                                className="flex justify-center w-full px-8 py-3 bg-gradient-to-br from-primary to-primary/90 text-white text-lg font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-2"
-                              >
-                                🚀 Invest Now
-                              </button>
-                            );
-                          })()}
-                        </div>
-                      );
-                    }}
-                  </ConnectButton.Custom>
+                  <ChainConnect size="sm" fullWidth />
                 </div>
               </div>
               <div className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition-shadow space-y-4">
@@ -508,47 +387,7 @@ const Home: NextPage = () => {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <ConnectButton.Custom>
-                    {({ account, chain, openConnectModal, mounted }) => {
-                      const ready = mounted;
-                      const connected = ready && account && chain;
-
-                      return (
-                        <div
-                          {...(!ready && {
-                            "aria-hidden": true,
-                            style: {
-                              opacity: 0,
-                              pointerEvents: "none",
-                              userSelect: "none",
-                            },
-                          })}
-                        >
-                          {(() => {
-                            if (!connected) {
-                              return (
-                                <button
-                                  onClick={openConnectModal}
-                                  className="flex justify-center w-full px-8 py-3 bg-gradient-to-br from-primary to-primary/90 text-white text-lg font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-2"
-                                >
-                                  Connect Wallet
-                                </button>
-                              );
-                            }
-
-                            return (
-                              <button
-                                onClick={redirectToApp}
-                                className="flex justify-center w-full px-8 py-3 bg-gradient-to-br from-primary to-primary/90 text-white text-lg font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-2"
-                              >
-                                🚀 Invest Now
-                              </button>
-                            );
-                          })()}
-                        </div>
-                      );
-                    }}
-                  </ConnectButton.Custom>
+                  <ChainConnect size="sm" fullWidth />
                 </div>
               </div>
               <div className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition-shadow space-y-4">
@@ -592,47 +431,7 @@ const Home: NextPage = () => {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <ConnectButton.Custom>
-                    {({ account, chain, openConnectModal, mounted }) => {
-                      const ready = mounted;
-                      const connected = ready && account && chain;
-
-                      return (
-                        <div
-                          {...(!ready && {
-                            "aria-hidden": true,
-                            style: {
-                              opacity: 0,
-                              pointerEvents: "none",
-                              userSelect: "none",
-                            },
-                          })}
-                        >
-                          {(() => {
-                            if (!connected) {
-                              return (
-                                <button
-                                  onClick={openConnectModal}
-                                  className="flex justify-center w-full px-8 py-3 bg-gradient-to-br from-primary to-primary/90 text-white text-lg font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-2"
-                                >
-                                  Connect Wallet
-                                </button>
-                              );
-                            }
-
-                            return (
-                              <button
-                                onClick={redirectToApp}
-                                className="flex justify-center w-full px-8 py-3 bg-gradient-to-br from-primary to-primary/90 text-white text-lg font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-2"
-                              >
-                                🚀 Invest Now
-                              </button>
-                            );
-                          })()}
-                        </div>
-                      );
-                    }}
-                  </ConnectButton.Custom>
+                  <ChainConnect />
                 </div>
               </div>
             </div>
@@ -901,47 +700,7 @@ const Home: NextPage = () => {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
-              <ConnectButton.Custom>
-                {({ account, chain, openConnectModal, mounted }) => {
-                  const ready = mounted;
-                  const connected = ready && account && chain;
-
-                  return (
-                    <div
-                      {...(!ready && {
-                        "aria-hidden": true,
-                        style: {
-                          opacity: 0,
-                          pointerEvents: "none",
-                          userSelect: "none",
-                        },
-                      })}
-                    >
-                      {(() => {
-                        if (!connected) {
-                          return (
-                            <button
-                              onClick={openConnectModal}
-                              className="px-10 py-4 bg-gradient-to-br from-primary to-primary/90 text-white text-xl font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-3"
-                            >
-                              Connect Wallet
-                            </button>
-                          );
-                        }
-
-                        return (
-                          <button
-                            onClick={redirectToApp}
-                            className="px-10 py-4 bg-gradient-to-br from-primary to-primary/90 text-white text-xl font-semibold rounded-lg shadow-lg shadow-primary/20 hover:shadow-xl transition-all duration-200 flex items-center gap-3"
-                          >
-                            🚀 Invest Now
-                          </button>
-                        );
-                      })()}
-                    </div>
-                  );
-                }}
-              </ConnectButton.Custom>
+              <ChainConnect />
               <button className="px-10 py-4 border border-border bg-background text-foreground text-xl font-semibold rounded-lg hover:bg-card transition-colors flex items-center gap-3">
                 👁️ Explore Projects →
               </button>

@@ -4,6 +4,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 import { ScaffoldEthAppWithProviders } from "../components/ScaffoldEthAppWithProviders";
 import { ThemeProvider } from "../components/ThemeProvider";
+import WalletProviders from "../components/solana/WalletProviders";
 import "../styles/globals.css";
 
 export const metadata: Metadata = {
@@ -17,7 +18,9 @@ const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
     <html suppressHydrationWarning>
       <body>
         <ThemeProvider enableSystem>
-          <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
+          <WalletProviders>
+            <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
+          </WalletProviders>
         </ThemeProvider>
       </body>
     </html>
