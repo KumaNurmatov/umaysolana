@@ -4,14 +4,12 @@ import { useEffect } from "react";
 
 import type { NextPage } from "next";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 import { useAccount } from "wagmi";
 import ChainConnect from "../components/ChainConnect";
 
 const Home: NextPage = () => {
   const { isConnected, address } = useAccount();
-  const router = useRouter();
   //const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
@@ -26,9 +24,7 @@ const Home: NextPage = () => {
     // , isRedirecting
   ]);
 
-  const redirectToApp = () => {
-    router.push("/app");
-  };
+  // const redirectToApp = () => router.push("/app");
 
   return (
     <div className="min-h-screen bg-background">

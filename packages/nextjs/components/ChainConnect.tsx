@@ -36,7 +36,9 @@ export default function ChainConnect({ size = "md", fullWidth = false }: Props) 
 
       {chain === "solana" ? (
         <div className={fullWidth ? "flex-1" : ""}>
-          <ConnectWalletButton className={`${fullWidth ? "w-full justify-center" : ""} ${solBtnSize}`} />
+          <ConnectWalletButton
+            className={`${fullWidth ? "w-full justify-center" : ""} ${solBtnSize}`}
+          />
         </div>
       ) : (
         <EthConnectButton.Custom>
@@ -54,7 +56,9 @@ export default function ChainConnect({ size = "md", fullWidth = false }: Props) 
               );
             }
             return (
-              <div className={`${fullWidth ? "w-full text-center" : ""} px-4 py-2 text-sm font-medium rounded-lg border border-border bg-background text-foreground`}>
+              <div
+                className={`${fullWidth ? "w-full text-center" : ""} px-4 py-2 text-sm font-medium rounded-lg border border-border bg-background text-foreground`}
+              >
                 {account?.displayName}
               </div>
             );
