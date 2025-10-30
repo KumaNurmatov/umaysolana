@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+
 import { ConnectButton as EthConnectButton } from "@rainbow-me/rainbowkit";
+
 import ConnectWalletButton from "./solana/ConnectWalletButton";
 
 type Props = { size?: "sm" | "md"; fullWidth?: boolean };
@@ -36,9 +38,7 @@ export default function ChainConnect({ size = "md", fullWidth = false }: Props) 
 
       {chain === "solana" ? (
         <div className={fullWidth ? "flex-1" : ""}>
-          <ConnectWalletButton
-            className={`${fullWidth ? "w-full justify-center" : ""} ${solBtnSize}`}
-          />
+          <ConnectWalletButton className={`${fullWidth ? "w-full justify-center" : ""} ${solBtnSize}`} />
         </div>
       ) : (
         <EthConnectButton.Custom>
@@ -68,5 +68,3 @@ export default function ChainConnect({ size = "md", fullWidth = false }: Props) 
     </div>
   );
 }
-
-

@@ -6,6 +6,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 
 import { useAccount } from "wagmi";
+
 import ChainConnect from "../components/ChainConnect";
 
 const Home: NextPage = () => {
@@ -17,12 +18,7 @@ const Home: NextPage = () => {
       setIsRedirecting(true);
       //router.push("/app");
     }*/
-  }, [
-    isConnected,
-    address,
-    router,
-    // , isRedirecting
-  ]);
+  }, [isConnected, address]);
 
   // const redirectToApp = () => router.push("/app");
 
