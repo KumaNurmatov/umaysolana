@@ -68,7 +68,7 @@ yarn deploy
 yarn start
 ```
 
-Visit `http://localhost:3000` to interact with the dApp.
+Visit `(https://umay.vercel.app/)` to interact with the dApp.
 
 ## 💡 Key Features
 
